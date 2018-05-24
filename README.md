@@ -28,7 +28,15 @@
 * Create an `index.html` file as a homepage.
 * Serve the `index.html` file at the root of your server.
 
-## Feature Tasks  
+## Feature Tasks
+#### Frontend 
+* Create an index.html with an anchor tag pointing to the OAuth authoraztion page 
+* Configure the query string with correct key value pairs
+* Create a page that displays one way or another depending on whether the user
+  is logged in with a cookie with a token.
+* Display some sort of user-identifying information (like an email or username)
+  obtained from the OAuth provider.
+
 ### Backend
 * Create and register your app with your OAuth provider
 * Configure the app to live at `http://localhost:3000`
@@ -72,11 +80,9 @@ app.get('/profile', (req, res) => {
 });
 ```
 
-#### Frontend 
-* Create an index.html with an anchor tag pointing to the OAuth authoraztion page 
-* Configure the query string with correct key value pairs
-* Create a page that displays one way or another depending on whether the user
-  is logged in with a cookie with a token.
-
 ####  Documentation  
 Write a description of the project in your README.md
+
+#### Stretch Goals
+Add more pages to your app that shows additional information fetched from the
+authorized OAuth resources.
