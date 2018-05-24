@@ -66,7 +66,7 @@ app.get('/profile', (req, res) => {
     return;
   }
 
-  res.write('<h1>You're Logged In</h1>');
+  res.write('<h1>You\'re Logged In</h1>');
   res.write('<p>Welcome back!</p>');
   res.end();
 });
