@@ -14,8 +14,10 @@
     <script>
         let authorization = document.getElementById('auth');
         let authUrl = 'https://github.com/login/oauth/authorize?';
+        // let authUrl = 'http://localhost:3000/oauth-callback';
         let params = {
             client_id: 'e1ca2050d91f5a887a33',
+            // redirect_uri: 'http://localhost:3000',
             scope: 'repo',
             state: '' + Math.random(),
         };

@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 app.get('/oauth-callback', (req, res) => {
     let {code, state} = req.query;
     
-    let tokenUrl = '';
+    let tokenUrl = 'https://github.com/login/oauth/access_token';
     superagent.post(tokenUrl)
     .send({
         client_id: process.env.CLIENT_ID,
@@ -28,10 +28,10 @@ app.get('/oauth-callback', (req, res) => {
     .then(userResponse => {
         let username = userResponse.login;
         let bio = userResponse.bio;
-        res.write('<a href=http://localhost:3000>' + username+ '</a>');
+        res.write('<a href="http://localhost:3000"><< HOME</a>');
         res.write('<h3>' + username+ '</h3>');
         res.write('<p>' + bio+ '</p>');
-        res.write('<pre>' + userResponse.body + '</pre>');
+        res.write('<pre>' + JSON.stringify(userResponse.body) + '</pre>');
         res.end();
         // res.send(userResponse.body);
     })
