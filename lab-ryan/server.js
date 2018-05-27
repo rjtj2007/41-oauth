@@ -3,6 +3,8 @@ require('dotenv').config();
 let express = require('express');
 let app = express();
 let superagent = require('superagent');
+let cookie = require('cookie');
+
 
 app.get('/', (req, res) => {
   res.cookie('newUser', false, {maxAge: 900000});
@@ -34,15 +36,16 @@ app.get('/oauth-callback', (req, res) => {
   .send({
     client_id: process.env.CLIENT_ID,
     client_secret: process.env.CLIENT_SECRET,
-    code: code
+    code: code,
+    state: state
   })
   .then(tokenResponse => {
     let token = tokenResponse.body.access_token;
     token = 'cheat' + token + 'cheat';
     res.cookie('oauth-token', token, {maxAge: 100000});
     res.write('<h1>Authorized!</h1>');
-    res.write(`<p>Token: ${token}</p>`);
-    res.write('<a href="/profile">Your Profile Page</a>');
+    // res.write(`<p>Token: ${token}</p>`);
+    res.write('<a href="/profile">Profile Page</a>');
     res.end();
   });
 });
@@ -64,15 +67,17 @@ app.get('/profile', (req, res) => {
   .then(userResponse => {
     let username = userResponse.body.login;
     let bio = userResponse.body.bio;
+    let location = userResponse.body.location;
     res.write('<div>');
     res.write('<a href="http://localhost:3000"><< home</a>');
     res.write('</div>');
     res.write('<div>');
     res.write('<img src="' + userResponse.body.avatar_url + '"/>')
     res.write('</div>');
-    res.write('<h1>' + username + '</h1>');
-    res.write('<p>' + bio + '</p>');
-    res.write('<p>' + JSON.stringify(userResponse.body) + '</p>');
+    res.write('<h1>' + 'Name: ' + username + '</h1>');
+    res.write('<p>' + 'Title: ' + bio + '</p>');
+    res.write('<p>' + 'Location: ' + location + '</p>')
+    // res.write('<p>' + JSON.stringify(userResponse.body) + '</p>');
     res.end();
   })
   .catch(err => {
