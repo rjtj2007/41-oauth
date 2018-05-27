@@ -3,6 +3,7 @@ require('dotenv').config();
 let express = require('express');
 let app = express();
 let superagent = require('superagent');
+let cookie = require('cookie');
 
 app.get('/', (req, res) => {
   res.cookie('newUser', false, {maxAge: 900000});
@@ -22,8 +23,9 @@ app.get('/new', (req, res) => {
 });
 
 app.get('/oauth-callback', (req, res) => {
+    console.log('hi there')
   let {code, state} = req.query;
-  if (!code) {
+    if (!code) {
     res.write('<h1>Unauthorized</h1>');
     res.write('<p>You must be authorized to access this page.</p>');
     res.end();
